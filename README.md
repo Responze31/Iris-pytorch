@@ -1,79 +1,73 @@
-# 📚 Student Performance Classification (PyTorch)
+# 🌸 Iris Flower Classification (PyTorch)
 
-This project uses a simple feedforward neural network built with **PyTorch** to classify student performance into 4 categories based on 33 features.
+This project implements a simple feedforward neural network using **PyTorch** to classify Iris flowers into 3 species based on 4 features.
 
 ---
 
 ## 🚀 How to Run
 
-1. **Install dependencies:**
+1. **Install required libraries:**
 
 ```bash
-pip install torch pandas scikit-learn matplotlib
+pip install torch scikit-learn matplotlib
 ```
 
-2. **Run the script:**
+2. **Run the script** (or execute the notebook cells):
 
-```bash
-python main.py
+Make sure to load and preprocess the Iris dataset before training the model.
+
+---
+
+## 🧠 Model Architecture
+
+- **Input Layer**: 4 features (sepal & petal length/width)
+- **Hidden Layers**: Two fully connected layers (128 & 64 neurons)
+- **Activation**: ReLU
+- **Output Layer**: 3 classes (Iris-setosa, Iris-versicolor, Iris-virginica)
+- **Loss Function**: CrossEntropyLoss
+- **Optimizer**: Adam
+
+---
+
+## 🧾 Data Preprocessing
+
+- Data is loaded using `sklearn.datasets.load_iris()`.
+- Features (`X`) are converted to `torch.float32`.
+- Labels (`y`) are converted to `torch.long` for classification:
+
+```python
+X = torch.tensor(X, dtype=torch.float32)
+y = torch.tensor(y, dtype=torch.long)
 ```
 
-Make sure the CSV file (`student_data.csv`) is in the same folder.
+- Data is split into **training** and **testing** sets using `train_test_split`.
 
 ---
 
-## 🧠 Model Overview
+## 📊 Output Example
 
-- Input: 33 features per student
-- Output: 4 performance classes
-- Model: 2 hidden layers (128 and 64 neurons), ReLU activations
-- Loss: CrossEntropyLoss
-- Optimizer: Adam
+Each epoch prints:
 
----
+```
+Epoch [1/100], Loss: 1.094, Train Accuracy: 0.733, Test Accuracy: 0.700
+```
 
-## 📂 Files
-
-- `main.py` – Main training script
-- `student_data.csv` – CSV data file with features and `Performance` label
-- `model.pth` – Trained model saved after training
+A plot shows **Training vs. Test Accuracy** after training.
 
 ---
 
-## 💡 Notes
-
-- Labels must be type `torch.long` for classification:
-  ```python
-  y = torch.tensor(y, dtype=torch.long)
-  ```
-- Accuracy is printed every epoch
-- A plot of training vs. test accuracy is shown at the end
-
----
-
-## 💾 Save & Load Model
+## 💾 Saving & Loading the Model
 
 To save:
 ```python
-torch.save(model.state_dict(), 'model.pth')
+torch.save(model.state_dict(), 'iris_model.pth')
 ```
 
 To load:
 ```python
-model.load_state_dict(torch.load('model.pth'))
+model.load_state_dict(torch.load('iris_model.pth'))
 model.eval()
 ```
-
----
-
-## 📈 Output Example
-
-```
-Epoch [1/100], Loss: 1.386, Train Accuracy: 0.270, Test Accuracy: 0.250
-...
-```
-
-A plot will show training and test accuracy over time.
 
 ---
 
@@ -81,6 +75,12 @@ A plot will show training and test accuracy over time.
 
 - Python 3.x
 - torch
-- pandas
 - scikit-learn
 - matplotlib
+
+---
+
+## 📂 Files
+
+- `main.py` or Jupyter notebook – Training & evaluation
+- `iris_model.pth` – Saved trained model (optional)
